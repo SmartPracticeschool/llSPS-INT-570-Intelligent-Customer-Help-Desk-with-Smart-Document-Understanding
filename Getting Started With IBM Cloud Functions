@@ -1,0 +1,15 @@
+HTTP Method
+Auth
+URL
+ANY 
+Public	https://eu-gb.functions.cloud.ibm.com/api/v1/web/info.taritsengupta01%40gmail.com_dev/default/disco-action
+
+
+
+
+curl -u API-KEY -X POST https://eu-gb.functions.cloud.ibm.com/api/v1/namespaces/info.taritsengupta01%40gmail.com_dev/actions/disco-action?blocking=true	
+
+HTTP Method
+Auth
+URL
+POST	API-KEY	https://eu-gb.functions.cloud.ibm.com/api/v1/namespaces/info.taritsengupta01%40gmail.com_dev/actions/disco-action	
