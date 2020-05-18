@@ -1,0 +1,26 @@
+Project Scope, Schedule, Team & Deliverables:
+
+
+Project Summary:We will be able to write an application that leverages multiple Watson AI services (Discovery, Speech to Text, Assistant, and Text to Speech). By the end of the project, we’ll learn best practices of combining Watson services, and how they can build interactive information retrieval systems with Discovery + Assistant.
+Project Requirements: Python,IBM Cloud,IBM Watson
+Functional Requirements: IBM cloud
+Technical Requirements: AI,ML,WATSON AI,PYTHON
+Software Requirements:watson assistant, watson discovery.
+Project Deliverables: IBM CLOUD COUSTOMERS
+Project Team: ME(Tarit Sengupta)
+Project Schedule: 20.5 days
+FLOW DIAGRAM:
+	
+STEPS:
+Clone the repo
+Create IBM Cloud services
+Configure Watson Discovery
+Create IBM Cloud Functions action
+Configure Watson Assistant
+Get IBM Cloud services credentials and add to .env file
+Run the application
+
+Watson assistant link:   
+https://integrations.eu-gb.assistant.watson.cloud.ibm.com/web/public/aeefde14-c29a-4fb8-aebc-bec68b613a7e
+ 
+
