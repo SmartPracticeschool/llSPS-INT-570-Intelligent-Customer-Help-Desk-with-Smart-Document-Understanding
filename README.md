@@ -334,6 +334,8 @@ Sample questions:
 
 # Node-Red link:  
 https://intelligent-customer-help-desk-with-smart-document-sb26365.eu-gb.mybluemix.net/ui/#!/0?socketid=fO_T1rwl_m1pyrgnAAAM
+# Youtube link:
+https://www.youtube.com/watch?v=az-4Ohupnns&t=25s
 
 
 # Lab4-Adding-Discovery-to-Chatbot
