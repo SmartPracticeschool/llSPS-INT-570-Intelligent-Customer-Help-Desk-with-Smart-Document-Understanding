@@ -20,6 +20,7 @@ Current document type support for SDU is based on your plan:
   * Advanced plans: PDF, Word, PowerPoint, Excel, PNG, TIFF, JPG, JSON, HTML
 
 Here is a great video that provides an overview of the benefits of SDU, and a walk-through of how to apply it to your document:
+[![video] https://youtu.be/az-4Ohupnns
 
 
 
