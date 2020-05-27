@@ -33,8 +33,6 @@ In our example, the webhook will communicate with an IBM Cloud Functions `web ac
 
 ## Flow
 
-![architecture](doc/source/images/architecture.png)
-
 1. The document is annotated using Watson Discovery SDU
 1. The user interacts with the backend server via the app UI. The frontend app UI is a chatbot that engages the user in a conversation.
 1. Dialog between the user and backend server is coordinated using a Watson Assistant dialog skill.
@@ -69,16 +67,11 @@ Create the following services:
 
 As shown below, launch the `Watson Discovery` tool and create a new data collection by selecting the `Upload your own data` option. Give the data collection a unique name. When prompted, select and upload the `ecobee3_UserGuide.pdf` file located in the `data` directory of your local repo.
 
-![upload_data_into_collection](doc/source/images/upload-disco-file-for-sdu.gif)
 
 The `Ecobee` is a popular residential thermostat that has a wifi interface and multiple configuration options.
 Before applying SDU to our document, lets do some simple queries on the data so that we can compare it to results found after applying SDU.
 
-![disco-collection-panel-pre](doc/source/images/disco-collection-panel-pre.png)
-
 Click the `Build your own query` [1] button.
-
-![disco-build-query](doc/source/images/disco-build-query.png)
 
 Enter queries related to the operation of the thermostat and view the results. As you will see, the results are not very useful, and in some cases, not even related to the question.
 
@@ -90,7 +83,6 @@ From the Discovery collection panel, click the `Configure data` button (located 
 
 Here is the layout of the `Identify fields` tab of the SDU annotation panel:
 
-![disco-sdu-panel](doc/source/images/disco-sdu-panel.png)
 
 The goal is to annotate all of the pages in the document so Discovery can learn what text is important, and what text can be ignored.
 
@@ -115,7 +107,7 @@ Once you click the `Apply changes to collection` button [6], you will be asked t
 
 Next, click on the `Manage fields` [1] tab.
 
-![disco-manage-fields](doc/source/images/disco-manage-fields.png)
+
 
 * [2] Here is where you tell Discovery which fields to ignore. Using the `on/off` buttons, turn off all labels except `subtitles` and `text`.
 * [3] is telling Discovery to split the document apart, based on `subtitle`.
@@ -125,22 +117,21 @@ Once again, you will be asked to reload the document.
 
 Now, as a result of splitting the document apart, your collection will look very different:
 
-![disco-collection-panel](doc/source/images/disco-collection-panel.png)
+
 
 Return to the query panel (click `Build your own query`) and see how much better the results are.
 
-![disco-build-query-2](doc/source/images/disco-build-query-2.png)
+
 #### Store credentials for future use
 
 In upcoming steps, you will need to provide the credentials to access your Discovery collection. The values can be found in the following locations.
 
 The `Collection ID` and `Environment ID` values can be found by clicking the dropdown button [1] located at the top right side of your collection panel:
 
-![get-collection-creds](doc/source/images/get-collection-creds.png)
+
 
 For credentials, return to the main panel of your Discovery service, and click the `Service credentials` [1] tab:
 
-![disco-creds](doc/source/images/disco-creds.png)
 
 Click the `View credentials` [2] drop-down menu to view the IAM `apikey` [3] and `URL` endpoint [4] for your service.
 
@@ -150,18 +141,15 @@ Now let's create the `web action` that will make queries against our Discovery c
 
 Start the `IBM Cloud Functions` service by selecting `Create Resource` from the IBM Cloud dashboard. Enter `functions` as the filter [1], then select the `Functions` card [2]:
 
-![action-start-service](doc/source/images/action-start-service.png)
 
 From the `Functions` main panel, click on the `Actions` tab. Then click on `Create`.
 From the `Create` panel, select the `Create Action` option.
 
 On the `Create Action` panel, provide a unique `Action Name` [1], keep the default package [2], and select the `Node.js 10` [3] runtime. Click the `Create` button [4] to create the action.
 
-![action-create](doc/source/images/action-create.png)
 
 Once your action is created, click on the `Code` tab [1]:
 
-![action-code](doc/source/images/action-code.png)
 
 In the code editor window [2], cut and paste in the code from the `disco-action.js` file found in the `actions` directory of your local repo. The code is pretty straight-forward - it simply connects to the Discovery service, makes a query against the collection, then returns the response.
 
@@ -169,7 +157,6 @@ If you press the `Invoke` button [3], it will fail due to credentials not being 
 
 Select the `Parameters` tab [1]:
 
-![action-params](doc/source/images/action-params.png)
 
 Add the following keys:
 
@@ -184,10 +171,9 @@ For values, please use the values associated with the Discovery service you crea
 
 Now that the credentials are set, return to the `Code` panel and press the `Invoke` button again. Now you should see actual results returned from the Discovery service:
 
-![action-code-invoke](doc/source/images/action-code-invoke.png)
+
 Next, go to the `Endpoints` panel [1]:
 
-![action-endpoint](doc/source/images/action-endpoint.png)
 
 Click the checkbox for `Enable as Web Action` [2]. This will generate a public endpoint URL [3].
 
@@ -201,8 +187,6 @@ To verify you have entered the correct Discovery parameters, execute the provied
 
 As shown below, launch the `Watson Assistant` tool and create a new dialog skill. Select the `Use sample skill` option as your starting point.
 
-![upload_data_into_collection](doc/source/images/create-skill.gif)
-
 This dialog skill contains all of the nodes needed to have a typical call center conversation with a user.
 
 #### Add new intent
@@ -214,17 +198,13 @@ Create a new `intent` that can detect when the user is asking about operating th
 From the `Customer Care Sample Skill` panel, select the `Intents` tab.
 Name the intent `#Product_Information`, and at a minimum, enter the following example questions to be associated with it.
 
-![create-assistant-intent](doc/source/images/create-assistant-intent.png)
 
 #### Create new dialog node
 
 Now we need to add a node to handle our intent. Click on the `Dialog` [1] tab, then click on the drop down menu for the `Small Talk` node [2], and select the `Add node below` [3] option.
 
-![assistant-add-node](doc/source/images/assistant-add-node.png)
-
 Name the node "Ask about product" [1] and assign it our new intent [2].
 
-![assistant-define-node](doc/source/images/assistant-define-node.png)
 
 This means that if Watson Assistant recognizes a user input such as "how do I set the time?", it will direct the conversation to this node.
 
@@ -234,7 +214,6 @@ Set up access to our WebHook for the IBM Cloud Functions action you created in S
 
 Select the `Options` tab [1]:
 
-![assistant-define-webhook](doc/source/images/assistant-define-webhook.png)
 
 Enter the public URL endpoint for your action [2].
 
@@ -242,13 +221,10 @@ Enter the public URL endpoint for your action [2].
 
 Return to the `Dialog` tab, and click on the `Ask about product` node. From the details panel for the node, click on `Customize`, and enable Webhooks for this node:
 
-![assistant-enable-webhook-for-node](doc/source/images/assistant-enable-webhook-for-node.png)
-
 Click `Apply`.
 
 The dialog node should have a `Return variable` [1] set automatically to `$webhook_result_1`. This is the variable name you can use to access the result from the Discovery service query.
 
-![assistant-node-config-webhook](doc/source/images/assistant-node-config-webhook.png)
 You will also need to pass in the users question via the parameter `input` [2]. The key needs to be set to the value:
 
 ```bash
@@ -259,7 +235,6 @@ If you fail to do this, Discovery will return results based on a blank query.
 
 Optionally, you can add these responses to aid in debugging:
 
-![assistant-node-config-webhook-2](doc/source/images/assistant-node-config-webhook-2.png)
 
 #### Test in Assistant Tooling
 
@@ -267,7 +242,6 @@ From the `Dialog` panel, click the `Try it` button located at the top right side
 
 Enter some user input:
 
-![try-it-dialog](doc/source/images/try-it-dialog.png)
 
 Note that the input "how do I turn on the heater?" has triggered our `Ask about product` dialog node, which is indicated by the `#Product_Information` response.
 
@@ -275,7 +249,6 @@ And because we specified that `$webhook_result_1.passages` be the response, that
 
 You can also verify that the call was successfully completed by clicking on the `Manage Context` button at the top right. The response from the Discovery query will be stored in the `$webhook_result_1` variable:
 
-![try-it-vars-after](doc/source/images/try-it-vars-after.png)
 
 ### 6. Get IBM Cloud services credentials and add to .env file
 
@@ -303,11 +276,10 @@ Credentials can be found by clicking the Service Credentials tab, then the View 
 
 An additional `ASSISTANT_SKILL_ID` value is required to access the Watson Assistant service. To get this value, select the `Manage` tab, then the `Launch tool` button from the panel of your Watson Assistance service. From the service instance panel, select your Assistant to display the assigned skills. For this code pattern, we used the dialog skill named `Custom Skill Sample Skill` that comes with the service:
 
-![sample-skill](doc/source/images/sample-skill.png)
+
 
 Click the option button (highlighted in the image above) to view the skill `API Details`. Here you will find the `Skill ID` value.
 
-![sample-skill-creds](doc/source/images/sample-skill-creds.png)
 
 ### 7. Run the application
 
@@ -325,7 +297,6 @@ Sample questions:
 
 # Sample Output
 
-![sample-output](doc/source/images/sample-output.png)
 
 # Access to results in application
 
