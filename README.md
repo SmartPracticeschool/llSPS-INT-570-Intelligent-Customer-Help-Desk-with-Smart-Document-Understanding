@@ -331,7 +331,8 @@ Sample questions:
 
 
 
-Node-Red link:  https://intelligent-customer-help-desk-with-smart-document-sb26365.eu-gb.mybluemix.net/ui/#!/0?socketid=fO_T1rwl_m1pyrgnAAAM
+# Node-Red link:  
+https://intelligent-customer-help-desk-with-smart-document-sb26365.eu-gb.mybluemix.net/ui/#!/0?socketid=fO_T1rwl_m1pyrgnAAAM
 
 
 # Lab4-Adding-Discovery-to-Chatbot
